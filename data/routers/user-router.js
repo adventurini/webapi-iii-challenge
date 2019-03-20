@@ -14,7 +14,7 @@ const upperCase = (req, res, next) =>{
 // get
 router.get('/', async (req,res)=>{
     try{
-        const users = await userData.find(req.query);
+        const users = await userData.get(req.query);
         res.status(200).json(users)
     }
     catch(error){
@@ -27,7 +27,7 @@ router.get('/', async (req,res)=>{
 router.get('/:id', async (req, res)=>{
     
     try{
-        const user = await userData.findById(req.params.id);
+        const user = await userData.getById(req.params.id);
         if(user){
             res.status(200).json(user)
         }

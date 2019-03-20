@@ -8,7 +8,7 @@ const router = express.Router();
 // get
 router.get('/', async (req,res)=>{
     try{
-        const posts = await postData.find(req.query);
+        const posts = await postData.get(req.query);
         res.status(200).json(posts)
     }
     catch(error){
@@ -21,7 +21,7 @@ router.get('/', async (req,res)=>{
 router.get('/:id', async (req, res)=>{
     
     try{
-        const post = await postData.findById(req.params.id);
+        const post = await postData.getById(req.params.id);
         if(post){
             res.status(200).json(post)
         }
