@@ -3,6 +3,14 @@ const userData = require('../helpers/userDb');
 
 const router = express.Router();
 
+const upperCase = (req, res, next) =>{
+    if (req.body.name !== req.body.name.toUpperCase()) {
+        res.status(400).json({ message: "Name is not uppercased" });
+      } else {
+        next();
+      }
+    };
+
 // get
 router.get('/', async (req,res)=>{
     try{
@@ -33,7 +41,7 @@ router.get('/:id', async (req, res)=>{
     }
 })
 // post
-router.post('/', async (req, res)=> {
+router.post('/', upperCase, async (req, res, next)=> {
     try{    
         const user = await userData.insert(req.body);
         res.status(201).json(user)
@@ -44,7 +52,7 @@ router.post('/', async (req, res)=> {
     }
 })
 // update
-router.put('/:id', async (req, res)=> {
+router.put('/:id', upperCase, async (req, res, next)=> {
     try{
         const user = await userData.update(req.params.id, req.body);
         if(user){

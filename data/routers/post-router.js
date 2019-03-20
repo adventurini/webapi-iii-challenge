@@ -3,6 +3,8 @@ const postData = require('../helpers/postDb');
 
 const router = express.Router();
 
+
+
 // get
 router.get('/', async (req,res)=>{
     try{
